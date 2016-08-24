@@ -1,0 +1,16 @@
+DistType "debian"
+MirrorURL "http://us.archive.ubuntu.com/ubuntu/"
+OSVersion "trusty"
+
+Setup
+Bootstrap
+
+RunCmd sed -i 's/$/ universe/' /etc/apt/sources.list
+RunCmd apt-get update
+
+InstallPkgs vim automake libtool build-essential wget
+
+RunCmd wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+RunCmd bash Miniconda3-latest-Linux-x86_64.sh -b
+
+Cleanup
