@@ -51,7 +51,7 @@ install_trusty: env_trusty
 	psutil
 
 create_ddocent:
-	test -f $I || sudo $S create -f ext4 $I
+	test -f $I || sudo $S create -s 2048 -f ext4 $I
 
 bootstrap_ddocent: create_ddocent
 	cp /media/host/defs/ddocent.def .
