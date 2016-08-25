@@ -5,6 +5,20 @@ OSVersion "stable"
 Setup
 Bootstrap
 
-InstallPkgs vim
+RunCmd apt-get update
+
+InstallPkgs vim \
+    git \
+    curl \
+    gcc \
+    g++ \
+    cmake \
+    wget \
+    zlib1g-dev \
+    parallel \
+    python \
+    bzip2 \
+    libncurses5-dev
+
 
 Cleanup
