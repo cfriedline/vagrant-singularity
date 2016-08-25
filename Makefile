@@ -10,6 +10,9 @@ B=sudo $(S) bootstrap $(I)
 ###################################
 
 
+trusty: create_trusty bootstrap_trusty env_trusty setup_python
+ddocent: create_ddocent bootstrap_ddocent environment_ddocent install_ddocent
+
 singularity_install:
 	wget https://github.com/gmkurtzer/singularity/archive/2.1.2.tar.gz
 	tar xvf 2.1.2.tar.gz
@@ -66,5 +69,5 @@ install_ddocent: env_ddocent
 	$W git clone https://github.com/jpuritz/dDocent.git src/dDocent
 	$W bash src/dDocent/install_dDocent_requirements ~/dDocent_run
 
-shell_ddocent: 
+shell_ddocent:
 	$S shell $I
