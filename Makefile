@@ -33,8 +33,7 @@ bootstrap_trusty: create_hpc
 	$B trusty.def
 
 env_trusty:
-	$W rm /environment
-	$C /media/host/envs/environment_trusty /environment
+	$C -f /media/host/envs/environment_trusty /environment
 
 install_trusty: env_trusty
 	$W conda \
@@ -58,8 +57,7 @@ bootstrap_ddocent: create_ddocent
 	$B ddocent.def
 
 env_ddocent:
-	$W rm -f /environment
-	$C /media/host/envs/environment_ddocent /environment
+	$C -f /media/host/envs/environment_ddocent /environment
 
 install_ddocent: env_ddocent
 	$W mkdir -p /dDocent_run
