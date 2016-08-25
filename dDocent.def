@@ -18,6 +18,8 @@ InstallPkgs vim \
     parallel \
     python \
     bzip2 \
-    libncurses5-dev
+    libncurses5-dev \
+    unzip \
+    gawk
 
 Cleanup
