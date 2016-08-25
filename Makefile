@@ -10,7 +10,20 @@ singularity_install:
 	sudo make install
 
 create_hpc:
-	sudo $S create -F trusty.img
+	sudo $S create -s 2048 -f ext4 -F trusty.img
 	cp /media/host/trusty.def .
 	sudo $S bootstrap trusty.img trusty.def
 	cp trusty.img /media/host
+
+setup_python:
+	sudo singularity exec -w trusty.img /miniconda3/bin/conda \
+	create -y \
+	-n py35 \
+	python=3.5 \
+	numpy \
+	scipy \
+	statsmodels \
+	scikit-learn \
+	jupyter \
+	notebook \
+	pandas
