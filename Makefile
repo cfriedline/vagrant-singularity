@@ -64,7 +64,7 @@ install_ddocent: env_ddocent
 	$W mkdir -p /src
 	$W rm -rf /src/dDocent
 	$W git clone https://github.com/jpuritz/dDocent.git /src/dDocent
-	$W bash /src/dDocent/install_dDocent_requirements /dDocent_run
+	$W bash -c "cd /src/dDocent_run && bash install_dDocent_requirements /dDocent_run"
 
 shell_ddocent:
 	$S shell $I
