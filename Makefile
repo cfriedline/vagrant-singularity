@@ -13,3 +13,4 @@ create_hpc:
 	sudo $S create -F trusty.img
 	cp /media/host/trusty.def .
 	sudo $S bootstrap trusty.img trusty.def
+	cp trusty.img /media/host
