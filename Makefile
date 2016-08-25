@@ -1,10 +1,13 @@
 S=/usr/local/bin/singularity
-I=trusty.img
-W=$(S) exec -w $(I)
+W=sudo $(S) exec -w $(I)
 E=$(S) exec $(I)
+C=sudo $(S) copy $(I)
+B=sudo $(S) bootstrap $(I)
 
-shell:
-	$S shell $I
+#### target specific variables ####
+%_ddocent : I=ddocent.img
+%_trusty : I=trusty.img
+###################################
 
 
 singularity_install:
@@ -16,15 +19,22 @@ singularity_install:
 	make && \
 	sudo make install
 
-create_hpc:
-	sudo $S create -s 3072 -f ext4 -F trusty.img
+shell_trusty:
+	$S shell $I
 
-bootstrap_hpc:
+create_trusty:
+	test -f $I || sudo $S create -s 3072 -f ext4 $I
+
+bootstrap_trusty: create_hpc
 	cp /media/host/trusty.def .
-	sudo $S bootstrap trusty.img trusty.def
+	$B trusty.def
 
-setup_python:
-	sudo $W /miniconda3/bin/conda \
+env_trusty:
+	$W rm /environment
+	$C /media/host/environment_trusty /environment
+
+setup_python: bootstrap_hpc env_trusty
+	$W conda \
 	create -y \
 	-n py35 \
 	python=3.5 \
@@ -36,3 +46,25 @@ setup_python:
 	notebook \
 	pandas \
 	psutil
+
+create_ddocent:
+	test -f $I || sudo $S create -f ext4 $I
+
+bootstrap_ddocent: create_ddocent
+	cp /media/host/ddocent.def .
+	$B ddocent.def
+
+env_ddocent:
+	$W rm -f /environment
+	$C /media/host/environment_ddocent /environment
+
+install_ddocent: env_ddocent
+	$W rm -rf dDocent
+	$W mkdir -p dDocent_run
+	$W mkdir -p src
+	$W rm -rf src/dDocent
+	$W git clone https://github.com/jpuritz/dDocent.git src/dDocent
+	$W bash src/dDocent/install_dDocent_requirements ~/dDocent_run
+
+shell_ddocent: 
+	$S shell $I
