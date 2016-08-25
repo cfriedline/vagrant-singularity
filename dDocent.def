@@ -20,5 +20,4 @@ InstallPkgs vim \
     bzip2 \
     libncurses5-dev
 
-
 Cleanup
