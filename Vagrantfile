@@ -8,8 +8,6 @@ Vagrant.configure(2) do |config|
         wget \
         libtool \
         vim \
-        debootstrap \
-        r-base
     sudo mkdir -p /media/cdrom
     sudo mkdir -p /media/host
   SHELL
