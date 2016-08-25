@@ -20,8 +20,7 @@ singularity_install:
 	./autogen.sh && \
 	./configure && \
 	make && \
-	sudo make install && \
-	cat /media/host/.bashrc >> .bashrc
+	sudo make install
 
 shell_trusty:
 	$S shell $I
