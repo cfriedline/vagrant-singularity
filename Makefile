@@ -1,4 +1,11 @@
 S=/usr/local/bin/singularity
+I=trusty.img
+W=$(S) exec -w $(I)
+E=$(S) exec $(I)
+
+shell:
+	$S shell $I
+
 
 singularity_install:
 	wget https://github.com/gmkurtzer/singularity/archive/2.1.2.tar.gz
@@ -17,7 +24,7 @@ bootstrap_hpc:
 	sudo $S bootstrap trusty.img trusty.def
 
 setup_python:
-	sudo singularity exec -w trusty.img /miniconda3/bin/conda \
+	sudo $W /miniconda3/bin/conda \
 	create -y \
 	-n py35 \
 	python=3.5 \
@@ -27,4 +34,5 @@ setup_python:
 	scikit-learn \
 	jupyter \
 	notebook \
-	pandas
+	pandas \
+	psutil
