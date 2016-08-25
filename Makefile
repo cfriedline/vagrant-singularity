@@ -11,7 +11,7 @@ B=sudo $(S) bootstrap $(I)
 
 
 trusty: create_trusty bootstrap_trusty env_trusty setup_python
-ddocent: create_ddocent bootstrap_ddocent environment_ddocent install_ddocent
+ddocent: create_ddocent bootstrap_ddocent env_ddocent install_ddocent
 
 singularity_install:
 	wget https://github.com/gmkurtzer/singularity/archive/2.1.2.tar.gz
