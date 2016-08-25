@@ -71,3 +71,9 @@ install_ddocent: env_ddocent
 
 shell_ddocent:
 	$S shell $I
+
+upload_ddocent:
+	cp $I /media/host
+
+upload_trusty:
+	cp $I /media/host
