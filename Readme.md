@@ -4,7 +4,7 @@
 
 ```
 git clone https://github.com/cfriedline/vagrant-singularity.git
-cd vagrant-singulatiry
+cd vagrant-singularity
 vagrant up
 vagrant ssh
 sudo umount vagrant
