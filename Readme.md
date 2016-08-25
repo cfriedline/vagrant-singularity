@@ -15,8 +15,19 @@ make singularity_install
 
 ## Create Trusty Container
 
-`make trusty`
+create: `make trusty`
+
+upload: `make upload_trusty`, then `scp` to your HPC
 
 ## Create dDocent Container
 
-`make ddocent`
+create: `make ddocent`
+
+upload: `make upload_ddocent`, then `scp` to your HPC
+
+exec:
+```
+cd /path/to/files
+singularity exec /path/to/ddocent.img dDocent
+
+```
