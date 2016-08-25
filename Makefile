@@ -62,12 +62,11 @@ env_ddocent:
 	$C /media/host/environment_ddocent /environment
 
 install_ddocent: env_ddocent
-	$W rm -rf dDocent
-	$W mkdir -p dDocent_run
-	$W mkdir -p src
-	$W rm -rf src/dDocent
-	$W git clone https://github.com/jpuritz/dDocent.git src/dDocent
-	$W bash src/dDocent/install_dDocent_requirements ~/dDocent_run
+	$W mkdir -p /dDocent_run
+	$W mkdir -p /src
+	$W rm -rf /src/dDocent
+	$W git clone https://github.com/jpuritz/dDocent.git /src/dDocent
+	$W bash /src/dDocent/install_dDocent_requirements /dDocent_run
 
 shell_ddocent:
 	$S shell $I
