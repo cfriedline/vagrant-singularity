@@ -29,12 +29,12 @@ create_trusty:
 	test -f $I || sudo $S create -s 3072 -f ext4 $I
 
 bootstrap_trusty: create_hpc
-	cp /media/host/trusty.def .
+	cp /media/host/defs/trusty.def .
 	$B trusty.def
 
 env_trusty:
 	$W rm /environment
-	$C /media/host/environment_trusty /environment
+	$C /media/host/envs/environment_trusty /environment
 
 install_trusty: env_trusty
 	$W conda \
@@ -54,12 +54,12 @@ create_ddocent:
 	test -f $I || sudo $S create -f ext4 $I
 
 bootstrap_ddocent: create_ddocent
-	cp /media/host/ddocent.def .
+	cp /media/host/defs/ddocent.def .
 	$B ddocent.def
 
 env_ddocent:
 	$W rm -f /environment
-	$C /media/host/environment_ddocent /environment
+	$C /media/host/envs/environment_ddocent /environment
 
 install_ddocent: env_ddocent
 	$W mkdir -p /dDocent_run
