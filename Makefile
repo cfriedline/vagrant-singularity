@@ -36,7 +36,7 @@ env_trusty:
 	$W rm /environment
 	$C /media/host/environment_trusty /environment
 
-setup_python: bootstrap_hpc env_trusty
+install_trusty: env_trusty
 	$W conda \
 	create -y \
 	-n py35 \
