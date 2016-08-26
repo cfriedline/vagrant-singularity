@@ -20,6 +20,7 @@ InstallPkgs vim \
     libncurses5-dev \
     unzip \
     gawk \
-    openjdk-7-jre
+    openjdk-7-jre \
+    bsd-mailx
 
 Cleanup
