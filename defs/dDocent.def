@@ -22,9 +22,4 @@ InstallPkgs vim \
     gawk \
     openjdk-7-jre
 
-RunCmd bash -c "wget https://ftp.gnu.org/gnu/parallel/parallel-20160822.tar.bz2 && \
-    tar xvf parallel-20160822.tar.bz2 && \
-    cd parallel-20160822 && \
-    ./configure && make && make install"
-
 Cleanup
