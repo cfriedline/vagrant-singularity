@@ -13,6 +13,9 @@ B=sudo $(S) bootstrap $(I)
 trusty: create_trusty bootstrap_trusty env_trusty setup_python
 ddocent: create_ddocent bootstrap_ddocent env_ddocent install_ddocent
 
+sleep:
+	sleep 5
+
 singularity_install:
 	wget https://github.com/gmkurtzer/singularity/archive/2.1.2.tar.gz
 	tar xvf 2.1.2.tar.gz
@@ -49,17 +52,17 @@ install_trusty: env_trusty
 	pandas \
 	psutil
 
-create_ddocent:
+create_ddocent: sleep
 	test -f $I || sudo $S create -s 2048 -f ext4 $I
 
-bootstrap_ddocent: create_ddocent
+bootstrap_ddocent: create_ddocent sleep
 	cp /media/host/defs/ddocent.def .
 	$B ddocent.def
 
-env_ddocent:
+env_ddocent: sleep
 	$C -f /media/host/envs/environment_ddocent /environment
 
-install_ddocent: env_ddocent
+install_ddocent: env_ddocent sleep
 	$W bash -c "rm -rf /src /dDocent_run && \
 	mkdir -p /install && \
 	mkdir -p /dDocent_run && \
@@ -68,7 +71,7 @@ install_ddocent: env_ddocent
 	git clone https://github.com/jpuritz/dDocent.git /src/dDocent && \
 	cd /install && \
 	bash /src/dDocent/install_dDocent_requirements /dDocent_run"
-	
+
 shell_ddocent:
 	$S shell $I
 
