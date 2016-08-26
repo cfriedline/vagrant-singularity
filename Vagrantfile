@@ -9,9 +9,10 @@ Vagrant.configure(2) do |config|
         automake \
         wget \
         libtool \
+        debootstrap \
         vim && \
-    sudo mkdir /media/cdrom && \
-    sudo mkdir /media/host
+    sudo mkdir -p /media/cdrom && \
+    sudo mkdir -p /media/host
   SHELL
 
 end
