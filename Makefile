@@ -1,5 +1,6 @@
 S=/usr/local/bin/singularity
 W=sudo $(S) exec -w $(I)
+WD=sudo $(S) -d exec -w $(I)
 E=$(S) exec $(I)
 C=sudo $(S) copy $(I)
 B=sudo $(S) bootstrap $(I)
@@ -11,7 +12,7 @@ B=sudo $(S) bootstrap $(I)
 
 
 trusty: create_trusty bootstrap_trusty setup_python
-ddocent: create_ddocent bootstrap_ddocent install_ddocent
+ddocent: create_ddocent bootstrap_ddocent gmk_install_ddocent
 
 sleep:
 	sleep 5
@@ -20,6 +21,14 @@ singularity_install:
 	wget https://github.com/gmkurtzer/singularity/archive/2.1.2.tar.gz
 	tar xvf 2.1.2.tar.gz
 	cd singularity-2.1.2 && \
+	./autogen.sh && \
+	./configure && \
+	make && \
+	sudo make install
+
+singularity_github:
+	git clone https://github.com/gmkurtzer/singularity.git
+	cd singularity && \
 	./autogen.sh && \
 	./configure && \
 	make && \
@@ -58,14 +67,12 @@ create_ddocent:
 bootstrap_ddocent: create_ddocent
 	cp /media/host/defs/ddocent.def .
 	$B ddocent.def
-	$W pwd
 
 env_ddocent:
 	$C -f /media/host/envs/environment_ddocent /environment
-	$W pwd
 
 install_ddocent: env_ddocent
-	$W bash -c "mkdir -p /install && \
+	$(W) bash -c "mkdir -p /install && \
 	mkdir -p /dDocent_run && \
 	rm -rf /src/dDocent && \
 	git clone https://github.com/jpuritz/dDocent.git /install/dDocent && \
@@ -74,9 +81,19 @@ install_ddocent: env_ddocent
 	bash install_dDocent_requirements /dDocent_run"
 	$W pwd
 
+gmk_install_ddocent:
+	$(W) /bin/sh << EOF
+		sudo rm -rf /install /dDocent_run && \
+		sudo mkdir /install && \
+		sudo mkdir /dDocent_run && \
+		sudo /usr/bin/git clone https://github.com/jpuritz/dDocent.git /install/dDocent && \
+		cd /install/dDocent && \
+		sudo sed -i s%https://cdhit.googlecode.com/files/cd-hit-v4.6.1-2012-08-27.tgz%https://github.com/weizhongli/cdhit/releases/download/V4.6.1/cd-hit-v4.6.1-2012-08-27.tgz% install_dDocent_requirements && \
+		sudo bash install_dDocent_requirements /dDocent_run
+		EOF
+
 clean_ddocent: env_ddocent
 	$W rm -rf /src /dDocent_run /install
-	$W pwd
 
 shell_ddocent:
 	$S shell $I
@@ -86,3 +103,6 @@ upload_ddocent:
 
 upload_trusty:
 	cp $I /media/host
+
+fix_ddocent:
+	$W pwd
