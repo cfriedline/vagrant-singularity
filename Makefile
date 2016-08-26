@@ -58,11 +58,9 @@ create_ddocent: sleep
 bootstrap_ddocent: create_ddocent sleep
 	cp /media/host/defs/ddocent.def .
 	$B ddocent.def
-	$W sync
 
 env_ddocent: sleep
 	$C -f /media/host/envs/environment_ddocent /environment
-	$W sync
 
 install_ddocent: env_ddocent sleep
 	$W bash -c "mkdir -p /install && \
@@ -76,7 +74,6 @@ install_ddocent: env_ddocent sleep
 
 clean_ddocent: env_ddocent sleep
 	$W rm -rf /src /dDocent_run /install
-	$W sync
 
 shell_ddocent:
 	$S shell $I
