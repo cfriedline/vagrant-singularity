@@ -31,14 +31,14 @@ shell_trusty:
 create_trusty:
 	test -f $I || sudo $S create -s 3072 -f ext4 $I
 
-bootstrap_trusty: create_hpc
+bootstrap_trusty: create_trusty sleep
 	cp /media/host/defs/trusty.def .
 	$B trusty.def
 
-env_trusty:
+env_trusty: sleep
 	$C -f /media/host/envs/environment_trusty /environment
 
-install_trusty: env_trusty
+install_trusty: env_trusty sleep
 	$W conda \
 	create -y \
 	-n py35 \
