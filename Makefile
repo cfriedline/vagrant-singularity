@@ -69,6 +69,7 @@ install_ddocent: env_ddocent sleep
 	rm -rf /src/dDocent && \
 	git clone https://github.com/jpuritz/dDocent.git /install/dDocent && \
 	cd /install/dDocent && \
+	sed -i s%https://cdhit.googlecode.com/files/cd-hit-v4.6.1-2012-08-27.tgz%https://github.com/weizhongli/cdhit/releases/download/V4.6.1/cd-hit-v4.6.1-2012-08-27.tgz% install_dDocent_requirements && \
 	bash install_dDocent_requirements /dDocent_run"
 
 shell_ddocent:
