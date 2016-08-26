@@ -15,12 +15,16 @@ InstallPkgs vim \
     cmake \
     wget \
     zlib1g-dev \
-    parallel \
     python \
     bzip2 \
     libncurses5-dev \
     unzip \
     gawk \
     openjdk-7-jre
+
+RunCmd wget https://ftp.gnu.org/gnu/parallel/parallel-20160822.tar.bz2 && \
+    tar xvf parallel-20160822.tar.bz2 && \
+    cd parallel-20160822 && \
+    ./configure && make && make_install
 
 Cleanup
