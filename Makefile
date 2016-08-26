@@ -53,14 +53,16 @@ install_trusty: env_trusty sleep
 	psutil
 
 create_ddocent: sleep
-	test -f $I || sudo $S create -s 2048 -f ext4 $I
+	test -f $I || sudo $S create -s 3096 -f ext3 $I
 
 bootstrap_ddocent: create_ddocent sleep
 	cp /media/host/defs/ddocent.def .
 	$B ddocent.def
+	$W sync
 
 env_ddocent: sleep
 	$C -f /media/host/envs/environment_ddocent /environment
+	$W sync
 
 install_ddocent: env_ddocent sleep
 	$W bash -c "mkdir -p /install && \
@@ -69,10 +71,12 @@ install_ddocent: env_ddocent sleep
 	git clone https://github.com/jpuritz/dDocent.git /install/dDocent && \
 	cd /install/dDocent && \
 	sed -i s%https://cdhit.googlecode.com/files/cd-hit-v4.6.1-2012-08-27.tgz%https://github.com/weizhongli/cdhit/releases/download/V4.6.1/cd-hit-v4.6.1-2012-08-27.tgz% install_dDocent_requirements && \
-	bash install_dDocent_requirements /dDocent_run"
+	bash install_dDocent_requirements /dDocent_run && \
+	sync"
 
 clean_ddocent: env_ddocent sleep
 	$W rm -rf /src /dDocent_run /install
+	$W sync
 
 shell_ddocent:
 	$S shell $I
