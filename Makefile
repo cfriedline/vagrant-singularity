@@ -63,14 +63,16 @@ env_ddocent: sleep
 	$C -f /media/host/envs/environment_ddocent /environment
 
 install_ddocent: env_ddocent sleep
-	$W bash -c "rm -rf /src /dDocent_run /install && \
-	mkdir -p /install && \
+	$W bash -c "mkdir -p /install && \
 	mkdir -p /dDocent_run && \
 	rm -rf /src/dDocent && \
 	git clone https://github.com/jpuritz/dDocent.git /install/dDocent && \
 	cd /install/dDocent && \
 	sed -i s%https://cdhit.googlecode.com/files/cd-hit-v4.6.1-2012-08-27.tgz%https://github.com/weizhongli/cdhit/releases/download/V4.6.1/cd-hit-v4.6.1-2012-08-27.tgz% install_dDocent_requirements && \
 	bash install_dDocent_requirements /dDocent_run"
+
+clean_ddocent: env_ddocent sleep
+	$W rm -rf /src /dDocent_run /install
 
 shell_ddocent:
 	$S shell $I
