@@ -73,7 +73,7 @@ install_ddocent: env_ddocent sleep
 	sync"
 
 clean_ddocent: env_ddocent sleep
-	$W rm -rf /src /dDocent_run /install
+	$W rm -rf /src /dDocent_run /install && sync
 
 shell_ddocent:
 	$S shell $I
