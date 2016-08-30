@@ -10,7 +10,7 @@ vagrant ssh
 sudo umount vagrant
 sudo mount -t vboxsf -o uid=$UID,gid=$(id -g) vagrant /media/host
 ln -s /media/host/Makefile
-make singularity_install
+make singularity_github
 ```
 
 ## Create Trusty Container
