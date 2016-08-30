@@ -32,6 +32,7 @@ tar \
 automake \
 libtool \
 make \
-sudo
+sudo \
+sendmail
 
 Cleanup
