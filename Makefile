@@ -73,11 +73,10 @@ bootstrap_ddocent: create_ddocent
 env_ddocent:
 	$C -f /media/host/envs/environment_ddocent /environment
 
-
 copy_install_script_ddocent:
 	$C -f /media/host/scripts/install_ddocent.sh /
 
-install_ddocent: copy_install_script_ddocent
+install_ddocent: env_ddocent copy_install_script_ddocent
 	$(W) /bin/bash /install_ddocent.sh
 
 clean_ddocent: env_ddocent
