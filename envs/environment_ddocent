@@ -4,9 +4,10 @@
 export SHELL=/bin/bash
 
 if test -z "$SINGULARITY_INIT"; then
-    PATH=/dDocent_run:$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+    #PATH=/dDocent_run:$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+    PATH=/dDocent_run:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/bin:/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/bin:/usr/sbin:$PATH
     PS1="Singularity.$SINGULARITY_CONTAINER> $PS1"
     SINGULARITY_INIT=1
     export PATH PS1 SINGULARITY_INIT
-    export LD_LIBRARY_PATH=/install/dDocent/freebayes/vcflib/tabixpp/htslib/:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=/install/dDocent_src/freebayes/vcflib/tabixpp/htslib/:/usr/lib:$LD_LIBRARY_PATH
 fi

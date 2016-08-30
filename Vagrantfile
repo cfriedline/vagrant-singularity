@@ -5,6 +5,8 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     echo "provisioning..." && \
     sudo apt-get -y install \
+        git \
+        yum \
         build-essential \
         automake \
         wget \

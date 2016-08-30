@@ -1,0 +1,37 @@
+RELEASE=7
+
+if [ -n "${1:-}" ]; then
+    RELEASE="$1"
+fi
+echo "Setting RELEASE=$RELEASE"
+
+DistType "redhat"
+MirrorURL "http://mirror.centos.org/centos-${RELEASE}/${RELEASE}/os/\$basearch/"
+
+Setup
+Bootstrap
+
+InstallPkgs iputils \
+vim \
+curl \
+git \
+gcc \
+gcc-c++ \
+wget \
+python \
+bzip2 \
+unzip \
+gawk \
+yum \
+cmake \
+zlib-devel \
+ncurses-devel \
+mailx \
+java-1.8.0-openjdk \
+tar \
+automake \
+libtool \
+make \
+sudo
+
+Cleanup
